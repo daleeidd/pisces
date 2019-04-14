@@ -1,5 +1,11 @@
 function _pisces_backspace -d "Overrides backspace to handle empty pairs removal"
 
+    # Natural Selection integration:
+    if functions -q _natural_selection_is_selecting; and _natural_selection_is_selecting
+        _natural_selection_kill_selection
+        return 0
+    end
+
     set -l line (commandline | string join \n)
     set -l index (commandline -C)
     if [ $index -ge 1 ]
